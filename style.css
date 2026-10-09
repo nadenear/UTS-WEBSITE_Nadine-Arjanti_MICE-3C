@@ -1,0 +1,469 @@
+/* ==========================================================
+   Nova Clothing - Split-Screen Sign In
+   Palette (dari logo): hijau tua, krem, lilac
+   Kontras (WCAG 2.2 AA):
+   - ink #0A2A25 di atas putih ........ ~15:1
+   - muted #4A5F5B di atas putih ...... ~6.8:1
+   - purple #5B2F91 di atas putih ..... ~9.5:1
+   - krem #F8E6C8 di atas hijau #0B4A42 ~ 8:1
+   - border input #6B7F7B di atas putih  ~4.2:1 (min 3:1)
+   ========================================================== */
+
+:root {
+  --green-950: #052B26;
+  --green-900: #073A34;
+  --green-800: #0B4A42;
+  --green-700: #12625A;
+  --cream: #F8E6C8;
+  --lilac: #C58AEB;
+  --purple-700: #5B2F91;
+  --ink: #0A2A25;
+  --muted: #4A5F5B;
+  --line: #6B7F7B;
+  --soft: #F3F5F4;
+  --white: #FFFFFF;
+  --error: #A11D33;
+
+  --font: "Fredoka", "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+}
+
+/* ---------- Reset & Box Model ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--white);
+}
+h1, p { margin: 0; }
+[hidden] { display: none !important; }
+
+/* ---------- Layout utama ---------- */
+.auth {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Mobile (< 768px): kolom artwork disembunyikan */
+.art { display: none; }
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 24px 20px 32px;
+  background: var(--white);
+}
+.panel__header { padding-bottom: 8px; }
+.panel__body {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.form-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 400px;
+  padding: 24px 0;
+}
+
+/* ---------- Logo teks ---------- */
+.logo {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--green-800);
+  text-decoration: none;
+  border-radius: 12px;
+}
+.logo__name {
+  position: relative;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.logo__name::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 44%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lilac);
+}
+.logo__sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--purple-700);
+}
+
+/* ---------- Heading ---------- */
+.mark { align-self: center; margin-bottom: 20px; }
+.title {
+  margin-bottom: 28px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Tombol ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 24px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .15s ease, border-color .2s ease;
+}
+.btn:active { transform: scale(.98); }
+
+.btn--sso {
+  color: var(--ink);
+  background: var(--white);
+  border-color: var(--line);
+}
+.btn--sso:hover { background: var(--soft); border-color: var(--green-800); }
+
+.btn--primary {
+  margin-top: 4px;
+  color: var(--cream);
+  background: var(--green-800);
+}
+.btn--primary:hover { background: var(--green-950); }
+
+/* ---------- Divider ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 22px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #C9D3D0;
+}
+
+/* ---------- Form ---------- */
+.form { display: flex; flex-direction: column; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field__row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.field__label { font-size: 0.95rem; font-weight: 600; }
+.field__control { position: relative; }
+
+.field__input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 20px;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field__input::placeholder { color: var(--muted); opacity: 1; }
+.field__input:hover { border-color: var(--green-800); }
+.field__input--icon { padding-right: 56px; }
+.field__input[aria-invalid="true"] { border-color: var(--error); }
+
+.field__error {
+  padding-left: 20px;
+  font-size: 0.875rem;
+  color: var(--error);
+}
+
+.icon-btn {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.icon-btn:hover { color: var(--green-800); background: var(--soft); }
+
+/* ---------- Checkbox ---------- */
+.check { display: flex; align-items: center; gap: 10px; }
+.check__input {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.check__input::after {
+  content: "";
+  width: 6px;
+  height: 11px;
+  margin-top: -2px;
+  border: solid var(--cream);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform .15s ease;
+}
+.check__input:checked { background: var(--green-800); border-color: var(--green-800); }
+.check__input:checked::after { transform: rotate(45deg) scale(1); }
+.check__label { font-size: 0.95rem; cursor: pointer; }
+
+/* ---------- Link & catatan ---------- */
+.link {
+  color: var(--purple-700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link:hover { color: var(--green-800); }
+.link--small { font-size: 0.875rem; font-weight: 500; }
+
+.note {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.note + .note { margin-top: 12px; }
+
+.form__status { min-height: 1.25rem; text-align: center; font-size: 0.9rem; color: var(--green-800); font-weight: 500; }
+
+/* ---------- Fokus keyboard (WCAG 2.4.7 / 2.4.11) ---------- */
+a:focus-visible,
+button:focus-visible,
+.field__input:focus-visible,
+.check__input:focus-visible {
+  outline: 3px solid var(--purple-700);
+  outline-offset: 3px;
+}
+
+/* ==========================================================
+   ARTWORK KIRI (animasi CSS murni)
+   ========================================================== */
+.art {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--green-800);
+}
+
+.shape, .dot, .plus { position: absolute; }
+
+/* Tile latar, mengikuti pola kotak samar di logo */
+.shape--tile-a,
+.shape--tile-b {
+  background: var(--green-900);
+  border-radius: 8% / 6%;
+  opacity: .75;
+  z-index: -3;
+}
+.shape--tile-a { top: 14%; left: -6%; width: 46%; height: 52%; animation: tile 16s ease-in-out infinite; }
+.shape--tile-b { right: -10%; bottom: -4%; width: 58%; height: 46%; animation: tile 20s ease-in-out infinite reverse; }
+
+/* Blob yang berubah bentuk (morphing) */
+.shape--blob-main,
+.shape--blob-deep,
+.shape--blob-cream,
+.shape--blob-lilac { aspect-ratio: 1; will-change: transform, border-radius; }
+
+.shape--blob-main {
+  top: -18%; right: -22%;
+  width: 82%;
+  background: var(--green-700);
+  z-index: -2;
+  animation: morph-a 14s ease-in-out infinite, drift-a 22s ease-in-out infinite;
+}
+.shape--blob-deep {
+  bottom: -26%; left: -24%;
+  width: 90%;
+  background: var(--green-950);
+  z-index: -2;
+  animation: morph-b 18s ease-in-out infinite, drift-b 26s ease-in-out infinite;
+}
+.shape--blob-cream {
+  top: 8%; left: 10%;
+  width: 26%;
+  background: var(--cream);
+  z-index: -1;
+  animation: morph-b 11s ease-in-out infinite, drift-c 17s ease-in-out infinite;
+}
+.shape--blob-lilac {
+  bottom: 12%; right: 8%;
+  width: 22%;
+  background: var(--lilac);
+  z-index: -1;
+  animation: morph-a 10s ease-in-out infinite, drift-d 15s ease-in-out infinite;
+}
+
+.dot { border-radius: 50%; background: var(--lilac); animation: bob 6s ease-in-out infinite; }
+.dot--1 { top: 20%; right: 26%; width: 18px; height: 18px; }
+.dot--2 { top: 62%; left: 12%; width: 12px; height: 12px; background: var(--cream); animation-delay: -2s; }
+.dot--3 { bottom: 24%; left: 38%; width: 22px; height: 22px; animation-delay: -4s; }
+
+/* Tanda plus, mengambil motif huruf "O" di logo */
+.plus { width: 44px; height: 44px; animation: spin 14s linear infinite; }
+.plus::before, .plus::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--cream);
+  border-radius: 99px;
+}
+.plus::before { width: 100%; height: 30%; }
+.plus::after  { width: 30%; height: 100%; }
+.plus--1 { top: 12%; right: 12%; }
+.plus--2 { bottom: 30%; left: 46%; width: 30px; height: 30px; animation-direction: reverse; }
+.plus--2::before, .plus--2::after { background: var(--lilac); }
+
+/* Wordmark tengah */
+.art__word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  animation: float 7s ease-in-out infinite;
+}
+.art__word-text {
+  position: relative;
+  font-size: clamp(5rem, 14vw, 11rem);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -0.04em;
+  color: var(--cream);
+  -webkit-text-stroke: 0.04em var(--cream);
+  paint-order: stroke fill;
+}
+.art__word-text::before {
+  content: "";
+  position: absolute;
+  top: -6%;
+  left: 38%;
+  width: .17em;
+  height: .17em;
+  border-radius: 50%;
+  background: var(--lilac);
+  animation: bob 4s ease-in-out infinite;
+}
+.art__word-smile {
+  width: 34%;
+  height: 2.2rem;
+  margin-top: .4rem;
+  border-bottom: 14px solid var(--lilac);
+  border-radius: 0 0 100% 100% / 0 0 100% 100%;
+  transform-origin: 50% 0;
+  animation: swing 5s ease-in-out infinite;
+}
+
+.art__tagline {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 6%;
+  max-width: 28ch;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--cream);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes morph-a {
+  0%, 100% { border-radius: 62% 38% 46% 54% / 55% 45% 55% 45%; }
+  33%      { border-radius: 38% 62% 58% 42% / 42% 58% 42% 58%; }
+  66%      { border-radius: 52% 48% 34% 66% / 60% 36% 64% 40%; }
+}
+@keyframes morph-b {
+  0%, 100% { border-radius: 40% 60% 62% 38% / 48% 38% 62% 52%; }
+  50%      { border-radius: 60% 40% 36% 64% / 38% 62% 38% 62%; }
+}
+@keyframes drift-a { 0%, 100% { transform: translate(0, 0) rotate(0deg); }   50% { transform: translate(-6%, 8%) rotate(24deg); } }
+@keyframes drift-b { 0%, 100% { transform: translate(0, 0) rotate(0deg); }   50% { transform: translate(8%, -6%) rotate(-20deg); } }
+@keyframes drift-c { 0%, 100% { transform: translate(0, 0) rotate(0deg); }   50% { transform: translate(40%, 30%) rotate(30deg); } }
+@keyframes drift-d { 0%, 100% { transform: translate(0, 0) rotate(0deg); }   50% { transform: translate(-50%, -40%) rotate(-30deg); } }
+@keyframes tile    { 0%, 100% { transform: translateY(0) rotate(0deg); }     50% { transform: translateY(4%) rotate(3deg); } }
+@keyframes bob     { 0%, 100% { transform: translateY(0); }                  50% { transform: translateY(-14px); } }
+@keyframes spin    { to { transform: rotate(360deg); } }
+@keyframes float   { 0%, 100% { transform: translate(-50%, -50%); }          50% { transform: translate(-50%, calc(-50% - 12px)); } }
+@keyframes swing   { 0%, 100% { transform: rotate(-7deg); }                  50% { transform: rotate(7deg); } }
+
+/* Hormati preferensi "reduce motion" (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  .shape, .dot, .plus, .art__word, .art__word-text::before, .art__word-smile {
+    animation: none !important;
+  }
+  .btn, .field__input, .check__input { transition: none; }
+}
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+/* Tablet & ke atas: mulai split-screen (artwork kiri, form kanan) */
+@media (min-width: 768px) {
+  .auth { grid-template-columns: 5fr 6fr; }
+  .art {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
+  .panel { padding: 32px 40px 40px; }
+  .art__tagline { font-size: 1.1rem; }
+}
+
+/* Desktop (min 1024px) */
+@media (min-width: 1024px) {
+  .auth { grid-template-columns: 1fr 1fr; }
+  .panel { padding: 40px 64px 48px; }
+  .art__tagline { font-size: 1.5rem; left: 10%; bottom: 8%; }
+}
+
+@media (min-width: 1440px) {
+  .auth { grid-template-columns: 11fr 10fr; }
+}

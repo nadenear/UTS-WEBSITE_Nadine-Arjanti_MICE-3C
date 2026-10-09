@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Nova Clothing</title>
+  <meta name="description" content="Sign in to your Nova Clothing account.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="auth">
+
+    <!-- Kolom kiri: artwork animasi (dekoratif) -->
+    <section class="art" aria-hidden="true">
+      <div class="shape shape--tile-a"></div>
+      <div class="shape shape--tile-b"></div>
+      <div class="shape shape--blob-main"></div>
+      <div class="shape shape--blob-deep"></div>
+      <div class="shape shape--blob-cream"></div>
+      <div class="shape shape--blob-lilac"></div>
+
+      <span class="dot dot--1"></span>
+      <span class="dot dot--2"></span>
+      <span class="dot dot--3"></span>
+      <span class="plus plus--1"></span>
+      <span class="plus plus--2"></span>
+
+      <div class="art__word">
+        <span class="art__word-text">Nova</span>
+        <span class="art__word-smile"></span>
+      </div>
+
+      <p class="art__tagline">Wear your vibe. Sign in and keep the good fits coming.</p>
+    </section>
+
+    <!-- Kolom kanan: form login -->
+    <section class="panel" aria-labelledby="auth-title">
+      <header class="panel__header">
+        <a class="logo" href="#" aria-label="Nova Clothing, home">
+          <span class="logo__name">Nova</span>
+          <span class="logo__sub">Clothing</span>
+        </a>
+      </header>
+
+      <div class="panel__body">
+        <div class="form-wrap">
+          <svg class="mark" width="56" height="56" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+            <rect width="64" height="64" rx="20" fill="#0B4A42"/>
+            <path d="M32 19v26M19 32h26" stroke="#F8E6C8" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="47" cy="17" r="5.5" fill="#C58AEB"/>
+          </svg>
+
+          <h1 id="auth-title" class="title">Welcome back</h1>
+
+          <button type="button" class="btn btn--sso">
+            <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.6 5.9c4.4-4.1 7-10.1 7-17.6z"/>
+              <path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/>
+              <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.6-5.9c-2.1 1.4-4.9 2.3-8.3 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/>
+            </svg>
+            Sign in with Google
+          </button>
+
+          <div class="divider" role="separator" aria-label="or"><span>or</span></div>
+
+          <form class="form" action="#" method="post" novalidate>
+            <div class="field">
+              <label class="field__label" for="identity">Email or username</label>
+              <input class="field__input" type="text" id="identity" name="identity"
+                     placeholder="Enter email or username" autocomplete="username" required
+                     aria-describedby="identity-error">
+              <p class="field__error" id="identity-error" hidden>Enter your email or username.</p>
+            </div>
+
+            <div class="field">
+              <div class="field__row">
+                <label class="field__label" for="password">Password</label>
+                <a class="link link--small" href="#">Forgot Password?</a>
+              </div>
+              <div class="field__control">
+                <input class="field__input field__input--icon" type="password" id="password" name="password"
+                       placeholder="Enter your password" autocomplete="current-password" required
+                       aria-describedby="password-error">
+                <button type="button" class="icon-btn" id="toggle-password"
+                        aria-label="Show password" aria-pressed="false" aria-controls="password">
+                  <svg class="icon icon--eye" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <svg class="icon icon--eye-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" hidden>
+                    <path d="M3 3l18 18"/>
+                    <path d="M10.6 5.1A10.7 10.7 0 0 1 12 5c6.4 0 10 7 10 7a17.6 17.6 0 0 1-3.2 4.1M6.6 6.6A17.4 17.4 0 0 0 2 12s3.6 7 10 7a9.9 9.9 0 0 0 4.4-1"/>
+                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+                  </svg>
+                </button>
+              </div>
+              <p class="field__error" id="password-error" hidden>Enter your password.</p>
+            </div>
+
+            <div class="check">
+              <input class="check__input" type="checkbox" id="remember" name="remember">
+              <label class="check__label" for="remember">Remember Me</label>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Sign In</button>
+            <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+
+          <p class="note">By continuing, you agree to our <a class="link" href="#">Terms</a> and <a class="link" href="#">Privacy Policy</a>.</p>
+          <p class="note">Don't have an account? <a class="link" href="#">Sign up</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
